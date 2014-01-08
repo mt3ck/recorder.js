@@ -23,8 +23,8 @@ function setupTests(){
     Recorder.record({
       start: function(){
         window.setTimeout(function(){
-          callback()
-        }, ms)
+          callback();
+        }, ms);
       },
       progress: function(ms){
         progressCalled = true;
@@ -35,13 +35,13 @@ function setupTests(){
   asyncTest("Audio start, stop, progress", 1, function(){
     var progressCalled = false;
     recordForSeconds(2000, function(){
-      Recorder.stop()
+      Recorder.stop();
       recordForSeconds(2000, function(){
         var duration = Recorder.stop();
-        equals(duration < 2001, true);
+        equals(duration >= 2000, true, "Milliseconds of audio recorded: " + duration);
         start();
       });
-    })
+    });
   });
 }
 
