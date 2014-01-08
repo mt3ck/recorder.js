@@ -35,6 +35,7 @@ package
 			ExternalInterface.addCallback("record", 		this.record);
 			ExternalInterface.addCallback("_stop",  		this.stop);
 			ExternalInterface.addCallback("_play",          this.play);
+			ExternalInterface.addCallback("clearAudio",     this.clearAudio);
 			ExternalInterface.addCallback("upload",         this.upload);
 			ExternalInterface.addCallback("audioData",      this.audioData);
 			ExternalInterface.addCallback("showFlash",      this.showFlash);
@@ -125,6 +126,18 @@ package
 				triggerEvent('playingStop', {});
 				isPlaying = false;
 			}
+		}
+		
+		protected function clearAudio():void
+		{
+			if(isPlaying){
+				playStop();
+			}else if(isRecording){
+				recordStop();
+			}
+			
+			buffer = new ByteArray();
+			triggerEvent('clearAudioFinished','');
 		}
 		
 		/* Networking functions */ 

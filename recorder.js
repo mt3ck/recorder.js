@@ -66,6 +66,14 @@ var Recorder = {
     this.flashInterface()._play();
   },
 
+  clearAudio: function(options){
+	options = options || {};
+	this.clearBindings("clearAudioFinished");
+	this.bind('clearAudioFinished', options['finished']);
+	
+	this.flashInterface().clearAudio();
+  },
+
   upload: function(options){
     options.audioParam = options.audioParam || "audio";
     options.params     = options.params || {};
